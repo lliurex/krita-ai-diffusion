@@ -423,9 +423,9 @@ class DiffusionSettings(SettingsTab):
         self.add("selection_grow", SliderSetting(S._selection_grow, self, 0, 25, "{} %"))
         self.add("selection_feather", SliderSetting(S._selection_feather, self, 0, 25, "{} %"))
         self.add("selection_padding", SliderSetting(S._selection_padding, self, 0, 25, "{} %"))
-        #self.add("nsfw_filter", ComboBoxSetting(S._nsfw_filter, parent=self))
+        self.add("nsfw_filter", ComboBoxSetting(S._nsfw_filter, parent=self))
 
-        nsfw_settings = [(_("Disabled"), 0.8), (_("Basic"), 0.8), (_("Strict"), 0.8)]
+        nsfw_settings = [(_("Strict"), 0.8)]
         self._widgets["nsfw_filter"].set_items(nsfw_settings)
         DiffusionSettings._warning_shown = self._warning_shown or settings.nsfw_filter > 0
 
