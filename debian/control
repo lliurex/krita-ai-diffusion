@@ -1,0 +1,15 @@
+Source: krita-ai-diffusion
+Section: python
+Priority: standard
+Maintainer: Equipo LliureX <lliurex@gva.es> 
+Build-Depends: debhelper (>=10),
+Standards-Version: 4.1.2
+Homepage: http://lliurex.net
+Vcs-Browser: https://github.com/lliurex/n4d
+
+Package: krita-ai-diffusion
+Architecture: all
+Depends: krita (>= 5.2)
+Description: Krita stable diffusion plugin
+  This package configures a stable diffusion plugin for krita.
+
