@@ -869,7 +869,7 @@ class SettingsDialog(QDialog):
         create_list_item(_("Diffusion"), self.diffusion)
         create_list_item(_("Interface"), self.interface)
         create_list_item(_("Performance"), self.performance)
-        create_list_item(_("Plugin"), self.about)
+        #create_list_item(_("Plugin"), self.about)
 
         self._list.setCurrentRow(0)
         self._list.currentRowChanged.connect(self._change_page)
