@@ -29,8 +29,8 @@ class AutoUpdateWidget(QWidget):
         self._update_status.setStyleSheet(f"color: {theme.yellow}; font-weight: bold;")
         self._update_error = QLabel(self)
 
-        #self._update_checkbox = QCheckBox(_("Check for updates on startup"), self)
-        #self._update_checkbox.setChecked(settings.auto_update)
+        self._update_checkbox = QCheckBox(_("Check for updates on startup"), self)
+        self._update_checkbox.setChecked(settings.auto_update)
         #self._update_checkbox.stateChanged.connect(self._toggle_auto_update)
 
         self._update_button = QPushButton(_("Download and Install"), self)
