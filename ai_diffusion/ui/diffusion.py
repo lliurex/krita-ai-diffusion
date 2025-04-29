@@ -29,26 +29,26 @@ class AutoUpdateWidget(QWidget):
         self._update_status.setStyleSheet(f"color: {theme.yellow}; font-weight: bold;")
         self._update_error = QLabel(self)
 
-        self._update_checkbox = QCheckBox(_("Check for updates on startup"), self)
-        self._update_checkbox.setChecked(settings.auto_update)
-        self._update_checkbox.stateChanged.connect(self._toggle_auto_update)
+        #self._update_checkbox = QCheckBox(_("Check for updates on startup"), self)
+        #self._update_checkbox.setChecked(settings.auto_update)
+        #self._update_checkbox.stateChanged.connect(self._toggle_auto_update)
 
         self._update_button = QPushButton(_("Download and Install"), self)
         self._update_button.setMinimumHeight(32)
         self._update_button.clicked.connect(self._run_update)
 
         update_layout = QVBoxLayout()
-        update_layout.addWidget(update_message)
-        update_layout.addWidget(self._update_status)
-        update_layout.addWidget(self._update_error)
-        update_layout.addWidget(self._update_checkbox)
-        update_layout.addWidget(self._update_button)
+        #update_layout.addWidget(update_message)
+        #update_layout.addWidget(self._update_status)
+        #update_layout.addWidget(self._update_error)
+        #update_layout.addWidget(self._update_checkbox)
+        #update_layout.addWidget(self._update_button)
         self.setLayout(update_layout)
 
-        root.auto_update.latest_version_changed.connect(self.update_content)
-        root.auto_update.error_changed.connect(self.update_content)
-        settings.changed.connect(self.update_content)
-        self.update_content()
+        #root.auto_update.latest_version_changed.connect(self.update_content)
+        #root.auto_update.error_changed.connect(self.update_content)
+        #settings.changed.connect(self.update_content)
+        #self.update_content()
 
     def update_content(self):
         self._update_checkbox.setChecked(settings.auto_update)
