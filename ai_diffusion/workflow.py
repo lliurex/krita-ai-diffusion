@@ -733,7 +733,7 @@ def generate(
     out_image = scale_refine_and_decode(
         extent, w, cond, sampling, out_latent, model_orig, clip, vae, models, checkpoint.tiled_vae
     )
-    out_image = w.nsfw_filter(out_image, sensitivity=misc.nsfw_filter)
+    out_image = w.nsfw_filter(out_image, sensitivity=0.8)
     out_image = scale_to_target(extent, w, out_image, models)
     w.send_image(out_image)
     return w
@@ -939,7 +939,7 @@ def inpaint(
         out_image = w.crop_image(out_image, desired_bounds)
         out_image = scale_to_target(cropped_extent, w, out_image, models)
 
-    out_image = w.nsfw_filter(out_image, sensitivity=misc.nsfw_filter)
+    out_image = w.nsfw_filter(out_image, sensitivity=0.8)
     compositing_mask = w.denoise_to_compositing_mask(cropped_mask)
     out_masked = w.apply_mask(out_image, compositing_mask)
     w.send_image(out_masked)
@@ -972,7 +972,7 @@ def refine(
         model, positive, negative, latent, models.arch, **_sampler_params(sampling)
     )
     out_image = vae_decode(w, vae, sampler, checkpoint.tiled_vae)
-    out_image = w.nsfw_filter(out_image, sensitivity=misc.nsfw_filter)
+    out_image = w.nsfw_filter(out_image, sensitivity=0.8)
     out_image = scale_to_target(extent, w, out_image, models)
     w.send_image(out_image)
     return w
@@ -1027,7 +1027,7 @@ def refine_region(
     out_image = scale_refine_and_decode(
         extent, w, cond, sampling, out_latent, model_orig, clip, vae, models, checkpoint.tiled_vae
     )
-    out_image = w.nsfw_filter(out_image, sensitivity=misc.nsfw_filter)
+    out_image = w.nsfw_filter(out_image, sensitivity=0.8)
     out_image = scale_to_target(extent, w, out_image, models)
     if extent.target != inpaint.target_bounds.extent:
         out_image = w.crop_image(out_image, inpaint.target_bounds)
@@ -1193,7 +1193,7 @@ def upscale_tiled(
         tile_result = vae_decode(w, vae, sampler, checkpoint.tiled_vae)
         out_image = w.merge_image_tile(out_image, tile_layout, i, tile_result)
 
-    out_image = w.nsfw_filter(out_image, sensitivity=misc.nsfw_filter)
+    out_image = w.nsfw_filter(out_image, sensitivity=0.8)
     if extent.initial != extent.target:
         out_image = scale(extent.initial, extent.target, ScaleMode.resize, w, out_image, models)
     w.send_image(out_image)
@@ -1386,7 +1386,7 @@ def prepare(
         raise Exception(f"Workflow {kind.name} not supported by this constructor")
 
     i.batch_count = 1 if is_live else i.batch_count
-    i.nsfw_filter = settings.nsfw_filter
+    i.nsfw_filter = 0.8
     return i
 
 
@@ -1421,7 +1421,7 @@ def create(i: WorkflowInput, models: ClientModels, comfy_mode=ComfyRunMode.serve
     This should be a pure function, the workflow is entirely defined by the input.
     """
     workflow = ComfyWorkflow(models.node_inputs, comfy_mode)
-    misc = MiscParams(i.batch_count, i.nsfw_filter)
+    misc = MiscParams(i.batch_count, 0.8)
 
     if i.kind is WorkflowKind.generate:
         return generate(

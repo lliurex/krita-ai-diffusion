@@ -166,7 +166,7 @@ class Settings(QObject):
 
     nsfw_filter: float
     _nsfw_filter = Setting(
-        _("NSFW Filter"), 0.0, _("Attempt to filter out images with explicit content")
+        _("NSFW Filter"), 0.8, _("Attempt to filter out images with explicit content")
     )
 
     new_seed_after_apply: bool
