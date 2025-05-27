@@ -1,3 +1,9 @@
+krita-ai-diffusion (0.3) noble; urgency=medium
+
+  * Adding custom kritarc to enable ai-diffusion by default 
+
+ -- Hector Garcia Huerta <hectorgh@gmail.com>  Tue, 27 May 2025 09:39:21 +0200
+
 krita-ai-diffusion (0.2.3) noble; urgency=medium
 
   * Initial release. (Closes: #XXXXXX)
